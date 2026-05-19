@@ -4,8 +4,6 @@ root = Path(__file__).resolve().parent.parent
 sys.path.append(str(root))
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
-app = FastAPI()
-
 from src.retrieval.chunking import chunk_text
 from src.retrieval.embedding import generate_embeddings
 from src.orchestration.evaluator import run_evaluation
@@ -13,6 +11,8 @@ from src.utils.utils import logging
 from pydantic import BaseModel, ValidationError
 from typing import List
 import json
+
+app = FastAPI()
 
 class EvalSample(BaseModel):
     question: str
