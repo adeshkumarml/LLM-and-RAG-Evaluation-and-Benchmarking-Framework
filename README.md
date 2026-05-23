@@ -47,7 +47,7 @@ Each sample contains:
 
 ## 3. System Architecture and Overview of Pipelines
 This framework is designed as a modular NLP evaluation system separating retrieval, generation, evaluation, orchestration, and deployment responsibilities into independent components. The architecture supports both local experimentation workflows and cloud-based online inference through a deployed Streamlit and FastAPI stack.<br>
-![Architecture Diagram](assests/RAG%20Eval%20Framework%20Arch%20Diag.png)<br>
+![Architecture Diagram](assets/RAG%20Eval%20Framework%20Arch%20Diag.png)<br>
 ### 3.1 Evaluation Workflow
 The evaluation workflow follows the sequence:<br>
 Dataset Sample ➡️ Context Chunking ➡️ Embedding Generation ➡️ Top-K Semantic Retrieval ➡️ Baseline LLM Generation ➡️ RAG-Enhanced Generation ➡️ Metric Evaluation ➡️ LLM-as-Judge Scoring ➡️ Aggregation & Reporting<br>
@@ -190,7 +190,7 @@ Outputs are generated in structured JSON format, making them suitable for both m
 
 ### 6.1 Evaluation Output Schema
 Example:
-![Example Sample-level Output Schema](assests/Sample-level%20Output%20SS.png)<br>
+![Example Sample-level Output Schema](assets/Sample-level%20Output%20SS.png)<br>
 This structure preserves both retrieval evidence and response-level evaluation, allowing transparent inspection of model behavior.
 ### 6.2 Aggregate Metrics
 Aggregate results summarize overall framework performance across the evaluation dataset.
