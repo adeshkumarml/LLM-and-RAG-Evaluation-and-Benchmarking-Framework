@@ -60,7 +60,7 @@ For each evaluation sample, the framework does the following:<br>
 ### 3.2 Local and Online Workflows
 This framework evaluation has been made to be utilized in either offline mode or online mode.<br>
 **Local Workflow:** The local workflow is intended for experimentation and large-scale evaluation runs. This can be run directly using the *main.py* driver module.<br>
-*main.py* ➡️ Evaluation Orchestrator ➡️ Aggregate Metrics ➡️ JSON Result Generation 
+*main.py* ➡️ Evaluation Orchestrator ➡️ Aggregate Metrics ➡️ JSON Result Generation<br>
 **Online Workflow:** The deployed workflow supports interactive benchmarking through the web interface.<br>
 Uploads Corpus and QA Dataset ➡️ Streamlit Frontend ➡️ FastAPI Backend ➡️ Evaluation Pipeline Execution ➡️ Results Returned to UI
 ### 3.3 Modules and their Functions
@@ -74,7 +74,7 @@ Uploads Corpus and QA Dataset ➡️ Streamlit Frontend ➡️ FastAPI Backend �
 |*app*|`fast_app.py`, `streamlit_ui.py`|Streamlit frontend and FastAPI backend
 ### 3.4 Dataflow
 The system processes data through the following stages:<br>
-- Raw corpus text is chunked into smaller retrieval units. (Note that offline evaluation through `main.py`, the "contexts" are chunked.)
+- Raw corpus text is chunked into smaller retrieval units. (Note that for offline evaluation through `main.py`, the "contexts" are chunked)
 - Sentence-transformer embeddings are generated for all chunks.
 - Incoming questions are embedded and matched against the corpus using semantic similarity.
 - The top-k retrieved chunks are appended to the generation prompt.
@@ -89,7 +89,7 @@ Simply saying, the quantification of the performance is done in three parts: (i)
 Exact Match evaluates whether the generated response exactly matches any of the ground-truth answers.<br>
 It (i) measures strict lexical correctness, (ii) useful for objective QA tasks and (iii) widely used in benchmark datasets such as SQuAD.<br>
 However there is quite a big limitation to this.<br>
-Exact Match is intentionally strict and may under-score semantically correct responses that differ in wording or phrasing.
+Exact Match is intentionally strict and may under-score semantically correct responses that differ in wording or phrasing.<br>
 **Example:**<br>
 Ground Truth: *action*, *work*<br>
 Generated: *action or deed*<br>
@@ -101,7 +101,7 @@ Semantic similarity helps reduce false negatives introduced by strict lexical co
 Retrieval quality is evaluated independently using:
 - Precision@K
 - Recall@K
-- Mean Reciprocal Rank (MRR)
+- Mean Reciprocal Rank (MRR)<br>
 These metrics rely on lexical overlap between retrieved chunks and ground-truth answers and are aimed at (i) measuring retrieval effectiveness, (ii) evaluating whether relevant information is surfaced and (iii) separates retrieval performance from generation performance.
 This distinction is important because strong retrieval does not always guarantee strong generation, and weak retrieval may still occasionally produce acceptable outputs.<br>
 However, lexical-overlap retrieval metrics may under-report semantically relevant chunks when wording differs from the reference answer. But here, since the ground-truth answers are directly the copied phrasing from the context itself, lexical-overlap is very likely to succeed in most cases.
@@ -135,11 +135,11 @@ This separation improves maintainability, debugging, component reusability and d
 The modular design also allows retrieval and evaluation pipelines to evolve independently without tightly coupling system components.
 ### 5.2 Embedding Model Choice
 This framework uses **all-MiniLM-L6-v2** for embeddings and semantic retrieval.<br>
-This model was selected because it provides a rather strong semantic retrieval quality, fast embedding generation, low memory requirements and practical deployment performance. This made it suitable for both local experimentation and free-tier cloud deployment.
+This model was selected because it provides a rather strong semantic retrieval quality, fast embedding generation, low memory requirements and practical deployment performance. This made it suitable for both local experimentation and free-tier cloud deployment.<br>
 **Tradeoffs:** Although efficient, the model is not state-of-the-art for retrieval and may struggle with longer contextual dependencies or very domain-specific retrieval tasks. Therefore this becomes a latency-quality tradeoff rather than maximum retrieval accuracy.
 ### 5.3 Generation Model Choice
 This framework uses **gpt-4o-mini** for both answer generation and LLM-as-Judge evaluation. This model was selected because being a rather new LLM, it has reliable instruction following, comparatively low inference cost than flagship models, fast response generation and stable API-based deployment.<br>
-Using a single model for generation and qualitative evaluation simplified orchestration and reduced operational complexity.
+Using a single model for generation and qualitative evaluation simplified orchestration and reduced operational complexity.<br>
 **Tradeoffs:** It is worth noting that evaluation may inherit model-specific biases, larger frontier models may provide stronger reasoning quality and API usage introduces external dependency and cost considerations.<br>
 The model choice therefore prioritizes reproducible benchmarking under realistic deployment constraints.
 ### 5.4 Prompt Design for LLM
