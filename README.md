@@ -202,6 +202,7 @@ Example results from a 150-sample evaluation run:
 | Correctness         |     3.32 | 4.51 |
 | Completeness        |     3.42 | 4.44 |
 | Fluency             |     4.87 | 4.98 |
+
 Retrieval performance:
 | Retrieval Metric | Score |
 | ---------------- | ----: |
@@ -251,7 +252,7 @@ The deployed Streamlit interface presents:
 - metadata
 - per-sample comparisons
 - downloadable JSON outputs<br>
-*(try it for yourself at https://llmragbenchmarking.streamlit.app/)*
+*(try it for yourself at https://llmragbenchmarking.streamlit.app/)*<br>
 This visualization layer allows users to inspect evaluation behavior interactively while preserving access to raw machine-readable results.
 ### 6.5 Result Interpretation
 Across evaluation runs, retrieval augmentation generally improved:
